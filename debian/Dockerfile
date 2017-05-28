@@ -19,7 +19,7 @@ RUN set -x \
 ENV GHOST_SOURCE /usr/src/ghost
 WORKDIR $GHOST_SOURCE
 
-ENV GHOST_VERSION 0.11.9
+ENV GHOST_VERSION 1.0.0-alpha.21
 
 RUN set -ex; \
 	\
@@ -33,7 +33,7 @@ RUN set -ex; \
 	apt-get install -y $buildDeps --no-install-recommends; \
 	rm -rf /var/lib/apt/lists/*; \
 	\
-	wget -O ghost.zip "https://github.com/TryGhost/Ghost/releases/download/${GHOST_VERSION}/Ghost-${GHOST_VERSION}.zip"; \
+	wget -O ghost.zip https://github.com/Stek-io/Ghost/archive/${GHOST_VERSION}.zip
 	unzip ghost.zip; \
 	\
 	npm install --production; \
