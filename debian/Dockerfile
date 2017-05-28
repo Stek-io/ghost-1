@@ -33,7 +33,7 @@ RUN set -ex; \
 	rm -rf /var/lib/apt/lists/*; \
 	\
 	wget -O ghost.tar.gz https://github.com/Stek-io/Ghost/releases/download/${GHOST_VERSION}/Ghost-${GHOST_VERSION}.tar.gz
-	tar xf ghost.tag.gz; \
+	/bin/tar xf ghost.tag.gz; \
 	\
 	npm install --production; \
 	\
