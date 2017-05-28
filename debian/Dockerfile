@@ -33,7 +33,7 @@ RUN set -ex; \
 	apt-get install -y $buildDeps --no-install-recommends; \
 	rm -rf /var/lib/apt/lists/*; \
 	\
-	wget -O ghost.zip https://github.com/Stek-io/Ghost/archive/${GHOST_VERSION}.zip
+	wget -O ghost.zip https://github.com/Stek-io/Ghost/releases/download/${GHOST_VERSION}/Ghost-${GHOST_VERSION}.zip
 	unzip ghost.zip; \
 	\
 	npm install --production; \
