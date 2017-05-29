@@ -20,6 +20,7 @@ ENV GHOST_SOURCE /usr/src/ghost
 WORKDIR $GHOST_SOURCE
 
 ENV GHOST_VERSION 1.0.0-alpha.21
+ENV CASPAR_VERSION 1.3.6
 
 RUN set -ex; \
 	\
@@ -35,8 +36,13 @@ RUN set -ex; \
 	\
 	wget -O ghost.zip "https://github.com/Stek-io/Ghost/archive/${GHOST_VERSION}.zip"; \
 	unzip ghost.zip; \
+        \
+	wget -O caspar.zip "https://github.com/Stek-io/Casper/archive/${CASPAR_VERSION}.zip"; \
+        unzip caspar.zip; \
 	\
         mv "Ghost-${GHOST_VERSION}"/* . && mv "Ghost-${GHOST_VERSION}"/.* . && rmdir "Ghost-${GHOST_VERSION}"; \
+        \
+        mv "Casper-${CASPAR_VERSION}"/* ./content/themes/casper/. && mv "Ghost-${CASPAR_VERSION}"/.*  ./content/themes/casper/. && rmdir "Ghost-${CASPAR_VERSION}"; \
         \
 	npm install --production; \
 	\
