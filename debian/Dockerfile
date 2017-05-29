@@ -27,19 +27,20 @@ RUN set -ex; \
 		gcc \
 		make \
 		python \
+		unzip \
 	'; \
 	apt-get update; \
 	apt-get install -y $buildDeps --no-install-recommends; \
 	rm -rf /var/lib/apt/lists/*; \
 	\
-	wget -O ghost.tar.gz https://github.com/Stek-io/Ghost/releases/download/${GHOST_VERSION}/Ghost-${GHOST_VERSION}.tar.gz
-	/bin/tar xf ghost.tag.gz; \
+	wget -O ghost.zip "https://github.com/Stek-io/Ghost/releases/download/${GHOST_VERSION}/Ghost-${GHOST_VERSION}.zip"; \
+	unzip ghost.zip; \
 	\
 	npm install --production; \
 	\
 	apt-get purge -y --auto-remove $buildDeps; \
 	\
-	rm ghost.tar.gz; \
+	rm ghost.zip; \
 	npm cache clean; \
 	rm -rf /tmp/npm*
 
