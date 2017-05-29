@@ -21,28 +21,30 @@ WORKDIR $GHOST_SOURCE
 
 ENV GHOST_VERSION 1.0.0-alpha.21
 
-RUN set -ex;
-
-RUN	buildDeps=' \
+RUN set -ex; \
+	\
+	buildDeps=' \
 		gcc \
 		make \
 		python \
 		unzip \
-	'; 
-RUN	apt-get update; 
-RUN	apt-get install -y $buildDeps --no-install-recommends; 
-RUN	rm -rf /var/lib/apt/lists/*; 
-
-RUN	wget -O ghost.zip "https://github.com/Stek-io/Ghost/releases/download/${GHOST_VERSION}/Ghost-${GHOST_VERSION}.zip";
-RUN	unzip ghost.zip; 
-
-RUN	npm install --production;
-
-RUN	apt-get purge -y --auto-remove $buildDeps; 
-
-RUN	rm ghost.zip; 
-RUN	npm cache clean; 
-RUN	rm -rf /tmp/npm*
+	'; \
+	apt-get update; \
+	apt-get install -y $buildDeps --no-install-recommends; \
+	rm -rf /var/lib/apt/lists/*; \
+	\
+	wget -O ghost.zip "https://github.com/Stek-io/Ghost/archive/${GHOST_VERSION}.zip"; \
+	unzip ghost.zip; \
+	\
+        mv "Ghost-${GHOST_VERSION}"/* . && mv "Ghost-${GHOST_VERSION}"/.* . && rmdir "Ghost-${GHOST_VERSION}"; \
+        \
+	npm install --production; \
+	\
+	apt-get purge -y --auto-remove $buildDeps; \
+	\
+	rm ghost.zip; \
+	npm cache clean; \
+	rm -rf /tmp/npm*
 
 ENV GHOST_CONTENT /var/lib/ghost
 RUN mkdir -p "$GHOST_CONTENT" \
